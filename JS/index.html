@@ -39,13 +39,35 @@
                     <legend>Snacks<legend>
                     <div class="input-container">
                     </div>
-                  </fieldset> 
+                </fieldset> 
                   
-                  <fieldset id="exercise">
-                    <legend>Exercise<legend>
-                    <div class="input-container">
+                <fieldset id="exercise">
+                <legend>Exercise<legend>
+                <div class="input-container">
+                </div>
+                </fieldset>
+
+                    <div class="controls">
+                        <span>
+                            <label for="entry-dropdown">Add food or excercise:</label>
+                            <select id="entry-dropdown" name="options">
+                                <option value="breakfast" selected>Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="snacks">Snacks</option>
+                                <option value="exercise">Exercise</option>
+                            </select>
+                            <!-- type button to avoid sumit  -->
+                            <button type="button" id="entry-button">Add Entry</button>
+                            <div>
+                                <button type="submit">Calculate Remaining calories</button>
+                                <button type="button" id="clear">Clear</button>
+                            </div>
+                            <div id="output" class="output hide">
+
+                            </div>
+                        </span>
                     </div>
-                  </fieldset> 
             </form>
         </div>
     </main>
