@@ -8,7 +8,36 @@
     <title>RockPaperScissors</title>
 </head>
 <body>
-    <h1>Rock Paper and Scissors</h1>
-    <div id="numbers"></div>
+    <div>
+        <h1>Rock Paper and Scissors</h1> 
+        <details id = "rulesOfTheGame">
+            <summary>Reglas del juego</summary>
+            <p>Roca frente a Tijera gana</p>
+            <p>Roca frente a Papel pierde</p>
+            <p>Tijera frente a Papel gana</p>
+            <p>Opciones iguales es empate</p>
+            <p>El primero de las dos partes en hacer 3 puntos gana.</p>
+        </details>
+    </div>
+    <div id="containerMarcador">
+        <p>Player Score: <span class="marcador" id="playerMarcador">0</span></p>
+        <p>Computer Score: <span class="marcador" id="computadorMarcador">0</span></p>
+    </div>
+    <div id="gamePanel">
+        <p>Choose an option:</p>
+        <div id="buttonsPanel">
+            <button class="gameButton" id="rock">Rock</button>
+            <button class="gameButton" id="paper">Paper</button>
+            <button class="gameButton" id="scissors">Scissors</button>
+        </div>
+        <div>
+            <p id="roundResultText"></p>
+        </div>
+        
+    </div>
+    <div id="roundResults">
+        <button id="resetButton">Reset game</button>
+    </div>
+
 </body>
 </html>
