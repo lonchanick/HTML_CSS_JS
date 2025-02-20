@@ -1,23 +1,8 @@
 
-// const numbersContainer = document.getElementById('numbers');
-// let temporalBag = [];
-
-// for(let i=0; i<3; i++)
-//     temporalBag.push(getRandomComputerResult());
-
-// const constUniqueResult = [...new Set(temporalBag)];
-
-// for(const item of constUniqueResult)
-//     numbersContainer.insertAdjacentHTML("beforeend",item+" ");
-
-// function getRandomComputerResult() {
-//     const options = ["Rock", "Paper", "Scissors"];
-//     return options[Math.floor(Math.random() *3)];
-//   } 
-
 const rockElement = document.getElementById('rock');
 const paperElement = document.getElementById('paper');
 const scissorsElement = document.getElementById('scissors');
+const winnerElement = document.getElementById('winnerElement');
 
 const roundResultText = document.getElementById('roundResultText');
 const resetButtonElement = document.getElementById('resetButton');
@@ -48,44 +33,36 @@ resetButtonElement.addEventListener('click',()=>{
     resetGame();
 });
 
+function getRoundResults(userOption) {
+    
+    const computerOption = getComputerOption();
+  
+    if (hasPlayerWon(userOption, computerOption)) {
+      playerMarcadorVar++;
+      return `Player wins! ${userOption} beats ${computerOption}`;
+    } else if (computerOption === userOption) {
+      return `It's a tie! Both chose ${userOption}`;
+    } else {
+      computadorMarcadorVar++;
+      return `Computer wins! ${computerOption} beats ${userOption}`;
+    }
+  }
+
 function game(playerOption)
 {
-    const computerOption = getComputerOption();
-    const hasPlayerWonVar = hasPlayerWon(playerOption, computerOption);
-    //console.log(`${playerOption}  ${computerOption  } ${ hasPlayerWonVar}`);
+    roundResultText.innerText = getRoundResults(playerOption);
+    computadorMarcador.innerText = computadorMarcadorVar;
+    playerMarcador.innerText = playerMarcadorVar;
 
-    if(playerOption === computerOption)
-    {
-        roundResultText.innerText = "Es un empate.";
-        return;
-    }
+    if (playerMarcadorVar === 3 || computadorMarcadorVar === 3) {
+        winnerElement.innerText = `${
+        playerMarcadorVar === 3 ? "Player" : "Computer"
+        } has won the game!`;
 
-    if(hasPlayerWonVar)
-    {
-        roundResultText.innerText = "Jugador a ganado esta ronda.";
-        playerMarcadorVar++;
-        playerMarcador.innerText = playerMarcadorVar;
-    }else{
-        roundResultText.innerText = "Computador a ganado esta ronda.";
-        computadorMarcadorVar++;
-        computadorMarcador.innerText = computadorMarcadorVar;
-    }
-
-    if(playerMarcadorVar === 3)
-    {
-        roundResultText.innerText="Jugador GANA!";
         resetButtonElement.style.display = "block";
         gamePanelVar.style.display = 'none';
-        //resetGame();
-
-    }else if(computadorMarcadorVar === 3)
-    {
-        roundResultText.innerText="Computador GANA!";
-        resetButtonElement.style.display = "block";
-        gamePanelVar.style.display = 'none';
-        //resetGame();
+        roundResultText.innerText = '';
     }
-
 }
 
 function getComputerOption()
@@ -116,5 +93,5 @@ function resetGame()
     gamePanelVar.style.display = 'block';
     resetButtonElement.style.display = "none";
     roundResultText.style.display = "hide";
-
+    winnerElement.innerText = "";
 }
