@@ -44,6 +44,9 @@ scissorsElement.addEventListener('click',()=>{
     game("Scissors");
 });
 
+resetButtonElement.addEventListener('click',()=>{
+    resetGame();
+});
 
 function game(playerOption)
 {
@@ -73,15 +76,14 @@ function game(playerOption)
         roundResultText.innerText="Jugador GANA!";
         resetButtonElement.style.display = "block";
         gamePanelVar.style.display = 'none';
-        resetGame();
+        //resetGame();
 
     }else if(computadorMarcadorVar === 3)
     {
         roundResultText.innerText="Computador GANA!";
         resetButtonElement.style.display = "block";
         gamePanelVar.style.display = 'none';
-        resetGame();
-
+        //resetGame();
     }
 
 }
@@ -106,5 +108,13 @@ function test()
 
 function resetGame()
 {
+    playerMarcadorVar = 0;
+    computadorMarcadorVar =0;
+
+    playerMarcador.innerText = 0;
+    computadorMarcador.innerText = 0;
+    gamePanelVar.style.display = 'block';
+    resetButtonElement.style.display = "none";
+    roundResultText.style.display = "hide";
 
 }
