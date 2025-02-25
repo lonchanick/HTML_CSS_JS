@@ -75,6 +75,8 @@ const allSongs = [
 const cancion = document.getElementById('cancion');
 const artista = document.getElementById('artista');
 const album = document.getElementById('album').innerHTML = "<code>Album</code>"
+const playListSection=document.getElementById('playListSection');
+const puseButton = document.getElementById('pauseButton');
 
 const audio = new Audio();
 const userData ={
@@ -83,24 +85,33 @@ const userData ={
   songCurrentTime: 0,
 }
 
-function renderAllSongs(songs)
+function renderAllSongs()
 {
-  return songs.map(song =>
+  const renderedSongs = userData.songs.map(song =>
   `<li>
   <button class="songItem">
-    <span onclick="playSong(${song.id})" id="songName">${song.title}</span>
+    <span onclick="playSong2(${song.id})" id="songName">${song.title}</span>
     <span id="sontArtistName">${song.artist} </span>
     <span id="songDuration">${song.duration}</span>
   </button>
-  <button id="deleteButton">X</button>
+  <button id="deleteButton" onclick="deleteSong(${song.id})">X</button>
   </li>`).join('\n');
+
+  playListSection.innerHTML = renderedSongs;
 }
 
-function playSong(id)
+function playSong2(id)
 {
   const song = userData.songs.find(song => song.id === id);
   audio.src = song.src;
+  userData.currentSong = song;
   displayCurrentSong(song);
+
+  if(userData.currentSong.currentTime !== null)
+  {
+    audio.currentTime = userData.songCurrentTime;
+  }
+
   audio.play();
 }
 
@@ -110,7 +121,52 @@ function displayCurrentSong(song)
   cancion.innerHTML= song.title;
 }
 
-const playListSection=document.getElementById('playListSection');
-playListSection.innerHTML = renderAllSongs(userData.songs);
+function deleteSong(id)
+{ 
+  // userData.songs = userData?.songs.filter((song) => song.id !== id);
+
+  userData.songs = userData.songs.filter((song)=> song.id !== id);
+  renderAllSongs();
+
+}
+
+function pauseSong(id)
+{
+  userData.songCurrentTime = audio.currentTime;
+  audio.pause();
+}
+
+function nextSong()
+{
+  const currentSongId = userData.currentSong.id;
+  console.log(currentSongId);
+  console.log( userData.songs.length);
+  if(currentSongId > userData.songs.length)
+  {
+    playSong2(0);
+    return;
+  }
+
+  playSong2(currentSongId+1);
+}
+
+function previousSong()
+{
+
+}
+
+
+pauseButton.addEventListener('click', pauseSong);
+
+playButton.addEventListener('click',()=>{
+  if(userData.currentSong === null)
+    playSong2(userData.songs[0].id)
+  else
+    playSong2(userData.currentSong.id);
+});
+
+nextButton.addEventListener('click',nextSong);
+
+renderAllSongs();
 
 
