@@ -123,11 +123,8 @@ function displayCurrentSong(song)
 
 function deleteSong(id)
 { 
-  // userData.songs = userData?.songs.filter((song) => song.id !== id);
-
   userData.songs = userData.songs.filter((song)=> song.id !== id);
   renderAllSongs();
-
 }
 
 function pauseSong(id)
@@ -139,11 +136,15 @@ function pauseSong(id)
 function nextSong()
 {
   const currentSongId = userData.currentSong.id;
+  const lastSongId = userData.songs[userData.songs.length-1].id;
+  
   console.log(currentSongId);
-  console.log( userData.songs.length);
-  if(currentSongId > userData.songs.length)
+  console.log( lastSongId);
+
+  if(currentSongId === lastSongId)
   {
-    playSong2(0);
+    console.log("im here");
+    playSong2(userData.songs[0].id);
     return;
   }
 
