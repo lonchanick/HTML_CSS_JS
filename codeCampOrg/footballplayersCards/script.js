@@ -29,16 +29,40 @@ const barcelonaPlayers2019 = [
   
  
 const playerCards = document.getElementById('PlayerCards');
+const filterOption = document.getElementById('filterByPosition');
+ 
+filterOption.addEventListener("change",(e)=>{
+    playerCards.innerHTML="";
 
-function getPlayerCards()
-{
-    return `${barcelonaPlayers2019.map(player => `<div class="card" style="width: 18rem; margin: 10px;">
-    <div class="card-body">
-        <h5 id="pName" class="card-title">${player.name}</h5>
-        <h6 id="pNamePosition" class="card-subtitle mb-2 text-body-secondary">${player.position} #${player.number}</h6>
-        <p class="card-text">${player.description}</p>
-    </div>
-</div>`).join("\n")}`;
-}
+    if(e.target.value === 'Team')
+    {
+        playerCards.innerHTML+=getPlayerCards();
+        return;
+    }
+
+    playerCards.innerHTML+= getPlayerCards(barcelonaPlayers2019
+        .filter(p => p.position === e.target.value));
+});
 
 playerCards.innerHTML+= getPlayerCards();
+
+
+
+
+
+function getPlayerCards(playersList = barcelonaPlayers2019)
+{
+    return `${playersList.map(player => `<div class="card" style="width: 18rem; margin: 10px;">
+    <div class="card-body">
+        <h5 class="card-title">${player.name}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">${player.position} #${player.number}</h6>
+        <p class="card-text">${player.description}</p>
+    </div>
+</div>`).join("")}`;
+}
+
+function renderCards(filterOption)
+{
+    const players = barcelonaPlayers2019.filter(player => player.position === filterOption);
+    playerCards.innerHTML+= getPlayerCards(players);
+}
