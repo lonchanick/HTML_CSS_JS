@@ -7,9 +7,27 @@
     <title>ToDoAPP</title>
 </head>
 <body>
-    <p>mundo</p>
-    <dialog open>hola</dialog>
-
+    <h1>Todo List</h1>
+    <button id="addTodoButt">Add New</button>
+    <div id="todosContainer"></div>
+    <div>
+        <h3>Add new TODO</h3>
+        <form class="hidden" id="addNewTodoForm">
+            <!-- <label for="id" id="id"></label> -->
+            <label for="title">Title:</label>
+            <input type="text" id="title">
+            <label for="description">Description:</label>
+            <input type="text" id="description">
+            <label for="date">Date: </label>
+            <input type="date" id="date">
+            <button onclick="saveTodo()">Add</button>
+        </form>
+        <dialog id="dialogId">
+            <p>hola</p>
+            <button id="saveButt">new</button>
+            <button id="discardButt">discard</button>
+        </dialog>
+    </div>
 
 
 <script src="script.js"></script>
