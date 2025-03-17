@@ -1,18 +1,20 @@
 
-let todos = [
-{
-    id: genId('first todo'),
-    title: "first todo",
-    description: "first description",
-    date: Date()
-},
-{
-    id: genId('second todo'),
-    title: "second todo",
-    description: "second description",
-    date: Date()
-} 
-];
+// let todos = [
+// {
+//     id: genId('first todo'),
+//     title: "first todo",
+//     description: "first description",
+//     date: Date()
+// },
+// {
+//     id: genId('second todo'),
+//     title: "second todo",
+//     description: "second description",
+//     date: Date()
+// } 
+// ];
+
+let todos = JSON.parse(localStorage.getItem('data')) || [];
 
 let currentTodo = {};
 
@@ -26,7 +28,7 @@ const noButt = document.getElementById('noButt');
 const dialogE = document.getElementById('dialogId');
 
 //forms field add new ToDo
-const newTodoForm  = document.getElementById('addNewTodoForm');
+const newTodoFormId  = document.getElementById('newTodoFormId');
 const titleInput = document.getElementById('title');
 const descriptionInput = document.getElementById('description');
 const dateInput = document.getElementById('date');
@@ -36,7 +38,7 @@ const addButt = document.getElementById('addButtTodoForm');
 yesButt.addEventListener('click',()=>{ 
     addTodoButt.classList.toggle('hidden');
     todosContainer.classList.toggle('hidden');
-    newTodoForm.classList.toggle("hidden");
+    newTodoFormId.classList.toggle("hidden");
     resetFormFields();
 });
 
@@ -50,15 +52,13 @@ cancelButt.addEventListener('click',(e)=>{
 
 });
 
-
-
 const renderTodos = ()=>
 {
     todosContainer.innerHTML='';
 
     todosContainer.innerHTML=todos.map( ({id,title,description,date}) => 
     `<div id=${id}>
-    <p class="mb-0">Id: ${id}</p>
+    <p class="mb-0" hidden>Id: ${id}</p>
     <p class="mb-0">Title: ${title}</p>
     <p class="mb-0">Description: ${description}</p>
     <p >Date: ${date}</p>
@@ -72,7 +72,7 @@ const renderTodos = ()=>
 addTodoButt.addEventListener('click', ()=>{
     addTodoButt.classList.toggle('hidden');
     todosContainer.classList.toggle('hidden');
-    newTodoForm.classList.toggle("hidden");
+    newTodoFormId.classList.toggle("hidden");
 });
 
 addButt.addEventListener('click',(e)=>{
@@ -95,20 +95,22 @@ addButt.addEventListener('click',(e)=>{
         todos[indexTodo]=newTodo;
         addTodoButt.classList.toggle('hidden');
         todosContainer.classList.toggle('hidden');
-        newTodoForm.classList.toggle("hidden");
+        newTodoFormId.classList.toggle("hidden");
+        localStorage.setItem('data',JSON.stringify(todos));
         renderTodos();
-
         return;
     }
 
     todos.unshift(newTodo);
-
+    localStorage.setItem('data',JSON.stringify(todos));
     renderTodos();
+    resetFormFields();
 
     addTodoButt.classList.toggle('hidden');
     todosContainer.classList.toggle('hidden');
-    newTodoForm.classList.toggle("hidden");
+    newTodoFormId.classList.toggle("hidden");
 });
+
 const editTodo = (e)=>{ 
     const todoIndex = todos.findIndex(el => el.id === e.closest('div').parentElement.id);
     const todo =todos[todoIndex];
@@ -119,22 +121,27 @@ const editTodo = (e)=>{
     descriptionInput.value = todo.description;
     dateInput.value = todo.date;
 
+    localStorage.setItem('data',JSON.stringify(todos));
+
     addTodoButt.classList.toggle('hidden');
     todosContainer.classList.toggle('hidden');
-    newTodoForm.classList.toggle("hidden");
+    newTodoFormId.classList.toggle("hidden");
 }
 
 const deleteTodo = (e)=>{
     e.closest('div').parentElement.remove();
     const todoIndexToRemove = todos.findIndex((todo)=> todo.id === e.closest('div').parentElement.id);
-    alert(todoIndexToRemove);
+    //alert(todoIndexToRemove);
     todos.splice(todoIndexToRemove, 1);
-    renderTodos(); 
 
+    localStorage.setItem('data',JSON.stringify(todos));
+
+    renderTodos(); 
 }
 
-renderTodos(); 
-// alert(isEqual(todos[0],todos[2]));
+
+//main();
+renderTodos();  
 
 
 //genera un id unico, 
