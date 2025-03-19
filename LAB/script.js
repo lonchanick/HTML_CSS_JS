@@ -1,33 +1,35 @@
-const numberInput = document.getElementById("number-input");
-const convertBtn = document.getElementById("convert-btn");
-const result = document.getElementById("result");
+function decimalToRoman(num) {
+  const romanNumerals = [
+    { value: 1000, symbol: 'M' },
+    { value: 900,  symbol: 'CM' },
+    { value: 500,  symbol: 'D' },
+    { value: 400,  symbol: 'CD' },
+    { value: 100,  symbol: 'C' },
+    { value: 90,   symbol: 'XC' },
+    { value: 50,   symbol: 'L' },
+    { value: 40,   symbol: 'XL' },
+    { value: 10,   symbol: 'X' },
+    { value: 9,    symbol: 'IX' },
+    { value: 5,    symbol: 'V' },
+    { value: 4,    symbol: 'IV' },
+    { value: 1,    symbol: 'I' }
+  ];
 
-const decimalToBinary = (input) => {
-  if (input === 0) {
-    return "";
-  } else {
-    return decimalToBinary(Math.floor(input / 2)) + (input % 2); ///// ojo
+
+  romanNumerals.map(obj => console.log(obj.value));
+
+  let result = '';
+
+  for (const { value, symbol } of romanNumerals) {
+    while (num >= value) {
+      console.log(num,'----',value,' >>> ',symbol);
+      result += symbol;
+      num -= value;
+    }
   }
-};
 
-const checkUserInput = () => {
-  if (
-    !numberInput.value ||
-    isNaN(parseInt(numberInput.value)) ||
-    parseInt(numberInput.value) < 0
-  ) {
-    alert("Please provide a decimal number greater than or equal to 0");
-    return;
-  }
+  return result;
+}
 
-  result.textContent = decimalToBinary(parseInt(numberInput.value));
-  numberInput.value = "";
-};
-
-convertBtn.addEventListener("click", checkUserInput);
-
-numberInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    checkUserInput();
-  }
-});
+// Example:
+console.log(decimalToRoman(17));
