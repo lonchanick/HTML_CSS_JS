@@ -1,4 +1,4 @@
-//STEP 27
+//STEP 61: incompleto
 
 //median
 const median = nums => {
@@ -34,6 +34,20 @@ const spreadsheetFunctions = {
   median
 }
 
+//no se que se esta intentando aqui...
+const evalFormula = (x, cells)=>{
+
+}
+
+const update = (event)=> {
+  const element = event.target;
+  const value = element.value.replace(/\s/g, "");
+  //esta condicion evalua que el contenido del input no contenga su propio ID y que empieze con un '=' *value[0]*
+  if (!value.includes(element.id) && value[0] === '=') {
+
+  }
+};
+
 //exe zone
 //this is trigered when the whole page is loaded
 window.onload = ()=>
@@ -51,7 +65,7 @@ window.onload = ()=>
     //renderiza todas las columnas A, B, C, Etc..
     letters.forEach(createLabel);
   
-    //renderiza las filas 1, 2, 3, 4, etc...
+    //renderiza las filas o sea, todos las etiquetas INPUT 1, 2, 3, 4, etc...
     range(1,99).forEach(number =>  {
       createLabel(number);
       letters.forEach(letter => {
@@ -59,6 +73,7 @@ window.onload = ()=>
         input.type = 'text';
         input.id = number+letter;
         input.ariaLabel = number+letter;
+        input.onclick = update;
         container.appendChild(input);
       });
     });
@@ -66,7 +81,19 @@ window.onload = ()=>
   }
 
 
-// console.log(charRange('A','X'));
-const arr = [1,2,3];
-console.log(sum(arr));
-console.log(average(arr));
+// test zone
+// const arr = [1,2,3];
+// console.log(sum(arr));
+// console.log(average(arr));
+
+
+//currying
+// const test = num1 => (num2)=>num1+num2;
+// console.log(test(1)(22));
+
+
+//regex
+const regex =/hola/g;
+const string = 'hola - hola';
+const result = string.replace(regex,'mundo');
+console.log(result);
