@@ -93,7 +93,19 @@ window.onload = ()=>
 
 
 //regex
-const regex =/hola/g;
-const string = 'hola - hola';
-const result = string.replace(regex,'mundo');
-console.log(result);
+// const regex =/hola/g;
+// const string = 'hola - hola';
+// const result = string.replace(regex,'mundo');
+// console.log(result);
+
+//what this returns?
+const exe = ()=>{
+  const aux = Array.from(document.getElementById('container').children);
+  const aux2 = document.getElementById('container');
+  console.log(aux[1]);
+  console.log(aux[13]);
+  console.log(aux2);
+  // console.log(aux[1]);
+}
+
+setTimeout(exe, 500);
