@@ -1,40 +1,44 @@
-function checkForStraights(roll) {
-  // Convert roll to array of numbers
-  let dice = typeof roll === "string" ? roll.split("").map(Number) : roll;
+const authorContainer = document.getElementById('author-container');
+const loadMoreBtn = document.getElementById('load-more-btn');
 
-  // Remove duplicates and sort
-  let uniqueSorted = [...new Set(dice)].sort((a, b) => a - b);
+let startingIndex = 0;
+let endingIndex = 8;
+let authorDataArr = [];
 
-  // Helper to check for a straight of given length
-  function hasStraight(arr, length) {
-    for (let i = 0; i <= arr.length - length; i++) {
-      let isStraight = true;
-      for (let j = 1; j < length; j++) {
-        if (arr[i + j] !== arr[i] + j) {
-          isStraight = false;
-          break;
-        }
-      }
-      if (isStraight) return true;
-    }
-    return false;
+fetch('https://cdn.freecodecamp.org/curriculum/news-author-page/authors.json')
+  .then((res) => res.json())
+  .then((data) => {
+    authorDataArr = data;
+    displayAuthors(authorDataArr.slice(startingIndex, endingIndex));  
+  })
+  .catch((err) => {
+   authorContainer.innerHTML = '<p class="error-msg">There was an error loading the authors</p>';
+  });
+
+const fetchMoreAuthors = () => {
+  startingIndex += 8;
+  endingIndex += 8;
+
+  displayAuthors(authorDataArr.slice(startingIndex, endingIndex));
+  if (authorDataArr.length <= endingIndex) {
+    loadMoreBtn.disabled = true;
+loadMoreBtn.style.cursor = 'not-allowed';
+    loadMoreBtn.textContent = 'No more data to load';
   }
+};
 
-  // Check for large straight (5 consecutive)
-  if (uniqueSorted.length === 5 && hasStraight(uniqueSorted, 5))
-  {
-    updateRadioOption(4, 40);
-    // return 40;
-  }
+const displayAuthors = (authors) => {
+  authors.forEach(({ author, image, url, bio }, index) => {
+    authorContainer.innerHTML += `
+    <div id="${index}" class="user-card">
+      <h2 class="author-name">${author}</h2>
+      <img class="user-img" src="${image}" alt="${author} avatar">
+      <div class="purple-divider"></div>
+      <p class="bio">${bio.length > 50 ? bio.slice(0, 50) + '...' : bio}</p>
+      <a class="author-link" href="${url}" target="_blank">${author} author page</a>
+    </div>
+  `;
+  });
+};
 
-  // Check for small straight (4 consecutive)
-  if (uniqueSorted.length >= 4 && hasStraight(uniqueSorted, 4))
-  { 
-    updateRadioOption(3, 30);
-    // return 30;
-  }
-
-  updateRadioOption(5, 0);
-}
-
-console.log(checkForStraights([1,2,3,4,5]),[1,2,3,4,5]);
+loadMoreBtn.addEventListener('click', fetchMoreAuthors);
