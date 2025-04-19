@@ -1,3 +1,7 @@
-const asd = '/user_avatar/diego algo mas';
+const intervalId = setInterval((name,lastname)=> {
+    console.log(name, lastname+(Math.random()+1).toFixed(2));
+}, 500, 'Diego -','Arroyo');
 
-console.log(asd.startsWith('/user_avatar/'));
+setTimeout(()=>{
+    clearInterval(intervalId)
+}, 1000);
