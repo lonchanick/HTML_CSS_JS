@@ -1,0 +1,30 @@
+default
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* color: #fefae0 !important;  */
+}
+
+body
+{ 
+  background-color: #1b1b32;
+  color: #fefae0;
+  text-align: center;
+}
+
+#btn-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn{
+  height: 100px;
+  width: 100px;
+  /* border: 5px solid rgb(246, 255, 0); */
+}
+#emoji
+{
+  font-size: 8rem;
+}

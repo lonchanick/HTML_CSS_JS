@@ -1,0 +1,38 @@
+ 
+10:28:08 76: Introduction to GSAP
+10:28:10 77: GSAP Basics
+10:29:05 78: GSAP Setup
+10:31:29 79: Animation Techniques
+10:39:56 80: Integrating GSAP
+10:41:16 81: GSAP Object Overview
+10:46:14 82: GSAP Set Method
+10:49:52 83: From & FromTo Animation
+10:56:09 84: Staggering Animations
+11:01:49 85: Tween Control
+11:06:24 86: Mastering Timelines
+11:16:49 87: Crafting Unique Animations
+11:28:35 88: Wrapping Up GSAP
+11:28:43 89: OOP Introduction
+11:31:30 90: Demystifying THIS Keyword
+11:46:35 91: Factory Function
+11:57:32 92: Constructor Function
+12:15:32 93: Built-In Constructors
+12:19:48 94: Object.create Method
+12:23:46 95: Prototype Model
+12:41:49 96: Prototypal Inheritance
+12:53:03 97: Introduction to Classes
+13:06:19 98: Modifiers in OOP
+13:21:38 99: Encapsulation
+13:28:14 100: Abstraction
+13:34:51 101: Inheritance
+13:43:03 102: Polymorphism
+13:52:41 103: Sync & Async Programming
+13:56:08 104: Real-World Examples
+14:01:12 105: Callback Hell
+14:16:19 106: Promises
+14:37:30 107: Async Functions
+14:50:27 108: Reading Textual Data
+15:00:41 109: Handling JSON Data
+15:04:32 110: Fetching Data from APIs
+15:18:31 111: Error Handling
+15:22:43 112: Outro_
